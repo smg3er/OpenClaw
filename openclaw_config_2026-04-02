@@ -1,0 +1,125 @@
+{
+  "gateway": {
+    "auth": {
+      "mode": "token",
+      "token": "c64bf2ec875300d2dfe33fdf2a10d899251e860dd9c7f2e1"
+    },
+    "mode": "local",
+    "port": 18789,
+    "bind": "loopback",
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-04-02T17:04:06.485Z",
+    "lastRunVersion": "2026.4.1",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.4.1",
+    "lastTouchedAt": "2026-04-02T17:04:06.531Z"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/home/anton/.openclaw/workspace",
+      "model": {
+        "primary": "custom-192-168-68-107-1234/openai/gpt-oss-20b"
+      },
+      "models": {
+        "custom-192-168-68-107-1234/openai/gpt-oss-20b": {}
+      },
+      "timeoutSeconds": 3600
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "custom-192-168-68-107-1234": {
+        "baseUrl": "http://192.168.68.107:1234/v1",
+        "api": "openai-completions",
+        "apiKey": "lm-studio",
+        "models": [
+          {
+            "id": "openai/gpt-oss-20b",
+            "name": "openai/gpt-oss-20b (Custom Provider)",
+            "contextWindow": 33000,
+            "maxTokens": 4096,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "reasoning": false
+          }
+        ]
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "duckduckgo": {
+        "enabled": true
+      }
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "botToken": "8554659540:AAGNEBDGwKJhm0GZ06K3l3SiUho-0NKrp-s"
+    }
+  },
+"tools": {
+    "web": {
+      "search": {
+        "provider": "duckduckgo",
+        "enabled": true,
+        "openaiCodex": {}
+      },
+      "fetch": {
+        "enabled": true
+      }
+    },
+    "media": {
+      "audio": {
+        "enabled": true,
+        "maxBytes": 20971520,
+        "models": [
+          {
+            "type": "cli",
+            "command": "python3",
+            "args": [
+              "/home/anton/.openclaw/workspace/skills/faster-whisper/scripts/transcribe.py",
+              "{{MediaPath}}",
+              "--language", "ru",
+              "--model", "large-v3",
+              "--initial-prompt", "Пользователь говорит по-русски. Говори только по-русски. Транскрибируй ровно то, что сказал человек.",
+              "--format", "text",
+              "--quiet",
+              "--threads", "0",
+              "--batch-size", "8",
+              "--compute-type", "int8"
+            ],
+            "timeoutSeconds": 120
+          }
+        ]
+      }
+    }
+  }
+}
